@@ -1,6 +1,10 @@
+const fs = require('fs');
+
+
 function getLivros(req, res) {
     try {
-        res.send('ola mundo alura mundo')
+        const livros = JSON.parse(fs.readFileSync("livros.json"));
+        res.send(livros)
 
     }
     catch (error){
