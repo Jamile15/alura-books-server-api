@@ -6,6 +6,13 @@ function getTodosLivros(){
 
 }
 
-module.exports = [{
-    getTodosLivros
-}]
+function getLivroPorId(id) {
+    const livros = JSON.parse(fs.readFileSync("livros.json"))
+
+    const livroFiltrado = livros.filter( livro => livro.id === id )[0]
+    return livroFiltrado
+}
+module.exports = {
+    getTodosLivros,
+    getLivroPorId
+}
