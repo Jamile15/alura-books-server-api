@@ -1,4 +1,4 @@
-const { getTodosLivros, getLivroPorId, insereLivro, modificaLivro, deletaLivroPorId} = require("../servicos/livros");
+const { getTodosLivros, getLivroPorId, insereLivro, modificaLivro, deletaLivroPorId } = require("../servicos/livros");
 
 
 function getLivros(req, res) {
@@ -17,9 +17,15 @@ function getLivros(req, res) {
 function getLivro(req, res) {
     try {
         const id = req.params.id
-        const livro = getLivroPorId(id);
-        res.send(livro)
 
+
+        if (id && Number(id)) {
+            const livro = getLivroPorId(id);
+            res.send(livro)
+        } else {
+            res.status(422)
+            res.send("Id invalido")
+        }
     }
     catch (error) {
         res.status(500)
@@ -46,8 +52,18 @@ function patchLivro(req, res) {
         const id = req.params.id
         const body = req.body
 
-        modificaLivro(body, id)
-        res.send("item modificado com sucesso")
+
+
+        if (id && Number(id)) {
+
+            modificaLivro(body, id)
+            res.send("item modificado com sucesso")
+        }
+        else{
+            res.status(422)
+            res.send("Id EDITE invalido")
+            
+        }
 
     } catch (error) {
         res.status(500)
@@ -59,8 +75,15 @@ function patchLivro(req, res) {
 function deleteLivro(req, res) {
     try {
         const id = req.params.id
-        deletaLivroPorId(id)
-        res.send("item deletado com sucesso")
+       
+
+        if(id && Number(id)){
+            deletaLivroPorId(id)
+            res.send("item deletado com sucesso")
+        } else{
+            res.status(422)
+            res.send("Id DELETE invalido")
+        }
     } catch (error) {
         res.status(500)
         res.send(error.message)
