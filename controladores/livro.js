@@ -37,16 +37,16 @@ function getLivro(req, res) {
 function postLivro(req, res) {
     try {
         const livroNovo = req.body
-        if(req.body.nome){
+        if (req.body.nome) {
             insereLivro(livroNovo)
             res.status(201)
             res.send("livro inserido com sucesso")
         }
-        else{
+        else {
             res.status(422)
             res.send("CAmpo nome é obrigatorio")
         }
-       
+
 
     } catch (error) {
         res.status(500)
@@ -66,10 +66,10 @@ function patchLivro(req, res) {
             modificaLivro(body, id)
             res.send("item modificado com sucesso")
         }
-        else{
+        else {
             res.status(422)
             res.send("Id EDITE invalido")
-            
+
         }
 
     } catch (error) {
@@ -82,12 +82,12 @@ function patchLivro(req, res) {
 function deleteLivro(req, res) {
     try {
         const id = req.params.id
-       
 
-        if(id && Number(id)){
+
+        if (id && Number(id)) {
             deletaLivroPorId(id)
             res.send("item deletado com sucesso")
-        } else{
+        } else {
             res.status(422)
             res.send("Id DELETE invalido")
         }
